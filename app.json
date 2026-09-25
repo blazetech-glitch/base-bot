@@ -1,0 +1,62 @@
+{
+  "name": "BLAZE XMD Skeleton",
+  "description": "A modular BLAZE XMD WhatsApp bot skeleton for developers",
+  "keywords": ["whatsapp", "bot", "node", "baileys", "plugin-system"],
+  "logo": "https://raw.githubusercontent.com/blazetech-glitch/BLAZE-XMD/main/public/blaze-xmd-wordmark.png",
+  "repository": "https://github.com/blazetech-glitch/base-bot",
+  "success_url": "/",
+  "stack": "heroku-24",
+  "env": {
+    "SESSION_ID": {
+      "description": "Private WhatsApp session ID from your pairing flow.",
+      "value": "",
+      "required": true
+    },
+    "BOT_NAME": {
+      "description": "Name shown by the bot.",
+      "value": "BLAZE XMD",
+      "required": false
+    },
+    "PREFIX": {
+      "description": "Command prefix.",
+      "value": ".",
+      "required": false
+    },
+    "OWNER_NAME": {
+      "description": "Display name of the bot owner.",
+      "value": "YOUR NAME",
+      "required": false
+    },
+    "NUMERO_OWNER": {
+      "description": "Owner WhatsApp number with country code, digits only.",
+      "value": "",
+      "required": false
+    },
+    "DEVELOPER_NAME": {
+      "description": "Developer credit shown by the owner and bot-info commands.",
+      "value": "ARNOLDT20",
+      "required": false
+    },
+    "CREDIT": {
+      "description": "Project credit shown in bot responses.",
+      "value": "blazetech",
+      "required": false
+    },
+    "PUBLIC_MODE": {
+      "description": "Bot command mode: private or on for public mode.",
+      "value": "private",
+      "required": false
+    }
+  },
+  "formation": {
+    "worker": {
+      "quantity": 1,
+      "size": "basic"
+    }
+  },
+  "buildpacks": [
+    {
+      "url": "heroku/nodejs"
+    }
+  ]
+}

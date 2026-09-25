@@ -1,0 +1,21 @@
+{
+  "description": "Only these plugins are loaded at startup. Add paths under plugins/ to enable more.",
+  "enabled": [
+    "General/alive.js",
+    "General/botinfo.js",
+    "General/help.js",
+    "General/menu.js",
+    "General/owner.js",
+    "General/ping.js",
+    "General/info.js",
+    "General/profile.js",
+    "General/repeat.js",
+    "General/translate.js",
+    "Fun/fancy.js",
+    "Fun/funny.js",
+    "Group/groupinfo.js",
+    "Search/weather.js",
+    "Fun/riddle.js",
+    "Other/uptime.js"
+  ]
+}
