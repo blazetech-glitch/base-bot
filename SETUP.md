@@ -31,16 +31,7 @@ The bot will connect with the session configured in `settings.env`. Do not share
 
 ## 3. Lightweight plugin profile
 
-Only the files listed in `plugins.config.json` load at startup:
-
-- `alive` — health/status response
-- `botinfo` — owner-only runtime information
-- `help` — help command
-- `menu` — list loaded commands
-- `owner` — developer credit/contact card
-- `ping` — latency and memory check
-- `riddle` — small fun command
-- `uptime` — uptime check
+Only the files listed in `plugins.config.json` load at startup. The profile includes 32 plugins, with status saver controls, status posting/history, tag-all tools, antilink, antimention, antibot, antispam, antisticker, bad-word protection, group status, mute, and core commands.
 
 The remaining plugins stay in the repository but are disabled. To enable one, add its path relative to `plugins/` to the `enabled` list, for example:
 
@@ -48,7 +39,7 @@ The remaining plugins stay in the repository but are disabled. To enable one, ad
 "General/translate.js"
 ```
 
-Enable one plugin at a time and restart the bot. Downloaders, AI features, media conversion, and moderation plugins may require external services, extra configuration, or FFmpeg.
+Enable or disable plugins by editing the allow-list and restarting the bot. Downloaders, AI features, media conversion, and some moderation plugins may require external services, extra configuration, or FFmpeg.
 
 ## 4. Safe defaults
 

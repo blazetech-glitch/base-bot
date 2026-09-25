@@ -1,5 +1,6 @@
 const axios = require('axios');
 const { getBusinessProfile, businessPrompt } = require('../lib/businessProfile');
+const { getAntiMention, getMentionLimit } = require('../lib/antimention');
 const fs = require('fs');
 const path = require('path');
 
@@ -329,10 +330,49 @@ async function handleBusinessCustomerReply(client, message, { from, body }) {
   return true;
 }
 
+function getMentionedJids(message) {
+  const content = message?.message || {};
+  const contexts = Object.values(content)
+    .filter((value) => value && typeof value === 'object')
+    .map((value) => value.contextInfo)
+    .filter(Boolean);
+  return [...new Set(contexts.flatMap((context) => Array.isArray(context.mentionedJid) ? context.mentionedJid : []))];
+}
+
+function sameIdentity(left, right) {
+  return canonicalJid(left) && canonicalJid(left) === canonicalJid(right);
+}
+
+async function handleAntiMention(client, message, { from }) {
+  if (!isGroupChat(from) || message?.key?.fromMe) return false;
+  const mentions = getMentionedJids(message);
+  if (mentions.length < getMentionLimit() || !(await getAntiMention(from))) return false;
+
+  try {
+    const metadata = await client.groupMetadata(from);
+    const sender = message.key?.participant || message.key?.remoteJid;
+    const senderMember = metadata.participants?.find((member) => sameIdentity(member.id || member.jid, sender));
+    const botMember = metadata.participants?.find((member) => sameIdentity(member.id || member.jid, client.user?.id));
+    const senderIsAdmin = Boolean(senderMember?.admin) || sameIdentity(sender, metadata.owner);
+    if (senderIsAdmin || !botMember?.admin) return false;
+
+    await client.sendMessage(from, { delete: message.key });
+    await client.sendMessage(from, {
+      text: `🛡️ Mass mention removed.\n\n@${String(sender || '').split('@')[0]}: please avoid mentioning more than ${getMentionLimit()} members at once.`,
+      mentions: sender ? [sender] : []
+    });
+    return true;
+  } catch (error) {
+    console.error('[Antimention] enforcement failed:', error.message);
+    return false;
+  }
+}
+
 async function handleChatbotMessage(client, message, { from, sender, body }) {
   if (isFromBot(message, client) || isForwardedMessage(message)) return;
   if (from === 'status@broadcast') return;
 
+  if (await handleAntiMention(client, message, { from })) return;
   if (await handleGroupMentionSticker(client, message, { from, body })) return;
   if (!body || body.startsWith('.')) return;
 
@@ -378,5 +418,6 @@ module.exports = {
   isReplyToBot,
   isDirectBotMention,
   handleGroupMentionSticker,
+  handleAntiMention,
   isForwardedMessage
 };

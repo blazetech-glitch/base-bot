@@ -46,6 +46,11 @@
       "description": "Bot command mode: private or on for public mode.",
       "value": "private",
       "required": false
+    },
+    "ANTIMENTION_LIMIT": {
+      "description": "Maximum group mentions allowed before antimention removes a message.",
+      "value": "5",
+      "required": false
     }
   },
   "formation": {

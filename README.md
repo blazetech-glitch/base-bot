@@ -23,7 +23,7 @@ Built to be **forked, renamed, styled, and extended**.
 - Recursive plugin loader with an explicit allow-list
 - Styled BLAZE command metadata and menu system
 - Editable bot identity and developer credits
-- 16 startup plugins: core, fun, group-info, profile, repeat, translate, and weather commands
+- 32 startup plugins, including status saver, status posting/history, tag-all, antilink, antimention, antibot, antispam, antisticker, bad-word protection, group status, mute, and group controls
 - Local JSON database fallback with optional PostgreSQL support
 - Reusable plugin template in `plugins/Template/example.js`
 - Heroku-ready `Procfile` and `app.json`
@@ -39,6 +39,8 @@ npm start
 ```
 
 To add a command, copy `plugins/Template/example.js`, edit its metadata and handler, then add its path to `plugins.config.json`.
+
+Owner controls include `.statussaver on|off|status` and `.antimention on|off|status`. Group admins can use `.tagall`, `.all`, `.tagadmins`, `.antilink`, `.groupstatus`, and the enabled protection commands.
 
 ## Deploy
 

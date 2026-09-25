@@ -16,6 +16,22 @@
     "Group/groupinfo.js",
     "Search/weather.js",
     "Fun/riddle.js",
-    "Other/uptime.js"
+    "Other/uptime.js",
+    "General/statussaver.js",
+    "General/tostatus.js",
+    "General/statushistory.js",
+    "Settings/settings.js",
+    "Group/antimention.js",
+    "Group/groupe.js",
+    "Group/tagging.js",
+    "Group/antibot.js",
+    "Group/antispam.js",
+    "Group/antisticker.js",
+    "Group/badwords.js",
+    "Group/groupstatus.js",
+    "Group/gstatus.js",
+    "Group/mute.js",
+    "Group/closeopen.js",
+    "Group/events.js"
   ]
 }
